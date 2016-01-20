@@ -1,6 +1,7 @@
 import java.util.Arrays;
 
 public class Map {
+  
   private String[][] _stringMap;
   private Tile[][] _map;
   private int _x;
@@ -27,11 +28,12 @@ public class Map {
     return printedMap;
   }
   
-  public void setMap(Tile[][] a) {
-    _map = a;
+  public String[][] getStringMap() {
+    return _stringMap;
   }
   
-  public void setStringMap(String[][] a) {
-    _stringMap = a;
+  public Tile[][] getMap() {
+    return _map;
   }
+  
 }
