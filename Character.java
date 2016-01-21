@@ -26,7 +26,7 @@ public class Character{
     //Overloaded Constructor
     //======================
     //mainly used for opponents 
-    public Character(String name, totalhp, atk, def, lvl){
+    public Character(String name, int totalhp, int atk, int def, int lvl){
 	_name = name;
 	_totalhp = totalhp;
 	_hp = _totalhp;
@@ -37,6 +37,10 @@ public class Character{
     }
 
     //accessors========================================
+    public int getTotalHP(){
+	return _getTotalHP();
+    }
+    
     public int getHP(){
 	if (_hp <= 0) return 0;
 	return _hp;
@@ -53,9 +57,44 @@ public class Character{
     public int getEXP(){
 	return _exp;
     }
+
+    public int getCurrentEXP(){
+	return _currentexp;
+    }
     
     public int getLvl(){
 	return _level;
+    }
+    //================================================
+
+    //mutators========================================
+    public void setTotalHP(int x){
+	_totalhp = x;
+    }
+    
+    public void setHP(int x){
+	if (_hp <= 0) return 0;
+        _hp = x;
+    }
+
+    public void setAtk(int x){
+        _atk = x;
+    }
+    
+    public void setDef(int x){
+        _def = x;
+    }
+
+    public void setEXP(int x){
+        _exp = x;
+    }
+
+    public void setCurrentEXP(int x){
+        _currentexp = x;
+    }
+    
+    public void setLvl(int x){
+        _level = x;
     }
     //================================================
     

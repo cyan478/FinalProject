@@ -1,12 +1,15 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player extends Character{
     
-    private ArrayList<String> bag;
+    private ArrayList<String> _bag;
     
     public Player(String name){
 	super(name);
 	
-	bag = new ArrayList<string>();
-	bag.add("Oran berry");
+	_bag = new ArrayList<string>();
+	_bag.add("Oran berry");
 	
     }
     
@@ -15,7 +18,7 @@ public class Player extends Character{
     //gainEXP(x) -> if _exp+=exp > _exp limit, levelUp()
     public void Update(int exp){
 	gainEXP(exp);
-	if (this._currentexp >= this._exp){
+	if (getCurrentEXP() >= getEXP()){
 	    levelUp();
 	    _currentexp = 0;
 	}
@@ -30,15 +33,16 @@ public class Player extends Character{
     //Leveling up 
     //===========
     public void levelUp(){
-    	int h,a,d;
-    	h = (int)(Math.random() * 10);
+    	int h,a,d,l;
+    	h = getHP() + (int)(Math.random() * 10);
     	a = (int)(Math.random() *5);
     	d = (int)(Math.random() *5);
+	l = getLvl();
     	
-    	_hp += h;
-    	_atk += a;
+        setHP(h);
+        setAtk;
     	_def += d;
-    	_level += 1;
+        setLvl(l++);
     }
     
     
