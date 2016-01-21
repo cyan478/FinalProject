@@ -16,24 +16,24 @@ public class Character{
     }
 
     //accessors========================================
-    public getHP{
+    public int getHP(){
 	if (_hp <= 0) return 0;
 	return _hp;
     }
 
-    public getAtk{
+    public int getAtk(){
 	return _atk;
     }
     
-    public getDef{
+    public int getDef(){
 	return _def;
     }
 
-    public getEXP{
+    public int getEXP(){
 	return _exp;
     }
     
-    public getLvl{
+    public int getLvl(){
 	return _level;
     }
     //================================================
@@ -41,7 +41,7 @@ public class Character{
     //calculates if player gets a crit (gives more power in method attack(n))
     public int crit(){
     	int critical = _level;
-    	int r = int(Math.random() * 21); //0.05% chance
+    	int r = (int)(Math.random() * 21); //0.05% chance
     	if (r == 16) return 2*critical; //16 is a random number
     	return critical;
     }
@@ -53,18 +53,18 @@ public class Character{
     	int C = oppDef; //opponent's def power
     	int Y = 40; //constant
     	int Z = ((int)(Math.random() * 39)) + 200; //random roll
-    	return ((2A/5+2)*B*B)/C)/50)+2))*Y/10)*Z)/255;
+    	return ((((((((2*A/5+2)*B*B)/C)/50)+2))*Y/10)*Z)/255;
 	}
 
-    public int lowerHP(int n){
+    public void lowerHP(int n){
 	_hp -=n;
     }
     
-    public int levelUp(){
+    public void levelUp(){
     	int h,a,d;
     	h = (int)(Math.random() * 10);
-    	a += (int)(Math.random() *5);
-    	d += (int)(Math.random() *5);
+    	a = (int)(Math.random() *5);
+    	d = (int)(Math.random() *5);
     	
     	_hp += h;
     	_atk += a;
