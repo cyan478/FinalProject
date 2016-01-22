@@ -89,14 +89,29 @@ public class GameApp {
 	    if (input.equals("1")) System.out.println("<insert stats here>");
 	    else if (input.equals("2")) System.out.println("<insert bag items here>");
 	    else if (input.equals("3")) {
-		win = launchDungeon(1);
+		Map_Level1 a = new Map_Level1();
+		win = launchDungeon(a);
 		if (win) 
-		    p += "Congrats. You earned ___ gold and ___ items";
+		    System.out.println("Congrats. You earned ___ gold and ___ items!");
 		else
-		    p += "Unfortunately you have lost ___ gold and half your items";
+		    System.out.println( "Unfortunately you have lost ___ gold and half your items");
 	    }
-	    else if (input.equals("4")) System.out.println("<go to med dungeon>");
-	    else if (input.equals("5")) System.out.println("<go to hard dungeon>");
+	    else if (input.equals("4")) {
+		Map_Level2 a = new Map_Level2();
+		win = launchDungeon(a);
+		if (win) 
+		    System.out.println("Congrats. You earned ___ gold and ___ items!");
+		else
+		    System.out.println( "Unfortunately you have lost ___ gold and half your items");
+	    }
+	    else if (input.equals("5")) {
+		Map_Level3 a = new Map_Level3();
+		win = launchDungeon(a);
+		if (win) 
+		    System.out.println("Congrats. You earned ___ gold and ___ items!");
+		else
+		    System.out.println( "Unfortunately you have lost ___ gold and half your items");
+	    }
 	    else if (input.equals("6")) cont = false;
 	    else System.out.println("That command is unavailable. Please enter a valid number.");
       
@@ -109,12 +124,11 @@ public class GameApp {
     // Takes the int level of the dungeon selected
     // true: user has reached the stairs
     // false: user has quit 
-    public boolean launchDungeon(int level) {
-	Map_Level1 a = new Map_Level1();
-	// if (level == 2) Map_Level2 a = new Map_Level1();
-	boolean cont = true;
+    public boolean launchDungeon(Map a) {
+      	boolean cont = true;
 	String t = "";
 	String input = "";
+	String border = "* * * * * * * \n";
     
 	System.out.println("You are in Dungeon #1.");
 	System.out.println("Your objective: Find the flight of stairs and escape. \n");
@@ -127,73 +141,101 @@ public class GameApp {
 	    t += "'s' - DOWN \n";
 	    t += "'d' - RIGHT \n";
 	    t += "'bag' - CHECK BAG \n";
-	    t += "'help' - HELP \n";
+	    t += "'h' - HELP \n";
 	    t += "'quit' - QUIT [WARNING: You will lose half your money & items randomly] \n \n";
 	    t += "Dungeon Map: \n";
-	    t += "* * * * * * * \n";
+	    if (a.getRowL() == 5) border = "* * * * * * * * * *\n";
+	    if (a.getRowL() == 8) border = " * * * * * * * * * * * * * *\n";
+	    t += border;
 	    t += a;
-	    t += "* * * * * * *";
+	    t += border;
 	    System.out.println(t);
       
 	    try {
 		input = in.readLine();
 	    }
 	    catch ( IOException e ) { }
-      
+	    // UP
 	    if (input.equals("w") || input.equals("W")) {
 		if (a.getX() - 1 >= 0) {
-		    a.setX(a.getX() -1);
-		    a.setTileFace(a.getX(), a.getY());
+		    if (a.getTileFace(a.getX()-1, a.getY()).equals("@")) {
+			t += "\n\n This path is blocked by an obstacle.";
+			a.setTileFace(a.getX()-1, a.getY());
+		    }
+		    else {
+			a.setX(a.getX() -1);
+			a.setTileFace(a.getX(), a.getY());
+		    }
 		}
 		else 
-		    t += "\n \nERROR: INVALID MOVEMENT\n"; 
+		    t += "\n\nERROR: INVALID MOVEMENT\n"; 
 	    }
-      
+	    // LEFT
 	    else if (input.equals("a") || input.equals("A")) {
 		if (a.getY() - 1 >= 0) {
-		    a.setY(a.getY()-1);
-		    a.setTileFace(a.getX(), a.getY());
+		    if (a.getTileFace(a.getX(), a.getY()-1).equals("@")) {
+			t += "\n\n This path is blocked by an obstacle.";
+			a.setTileFace(a.getX(), a.getY()-1);
+		    }
+		    else {
+			a.setY(a.getY()-1);
+			a.setTileFace(a.getX(), a.getY());
+		    }
 		}
 		else 
 		    t += "\n \nERROR: INVALID MOVEMENT\n"; 
 	    }
-      
+	    //DOWN
 	    else if (input.equals("s") || input.equals("S")) {
-		if (a.getX() + 1 < 3) {
-		    a.setX(a.getX()+1);
-		    a.setTileFace(a.getX(), a.getY());
+		if (a.getX() + 1 < a.getColumnL()) {
+		    if (a.getTileFace(a.getX()+1, a.getY()).equals("@")) {
+			t += "\n\nThis path is blocked by an obstacle.\n";
+			a.setTileFace(a.getX()+1, a.getY());
+		    }
+		    else {
+			a.setX(a.getX()+1);
+			a.setTileFace(a.getX(), a.getY());
+		    }
 		}
 		else 
 		    t += "\n \nERROR: INVALID MOVEMENT\n"; 
 	    }
-      
+
+	    // RIGHT
 	    else if (input.equals("d") || input.equals("D")) {
-		if (a.getY() + 1 < 3) {
-		    a.setY(a.getY() + 1);
-		    a.setTileFace(a.getX(), a.getY());
+		if (a.getY() + 1 < a.getColumnL()) {
+		    if (a.getTileFace(a.getX(), a.getY()+1).equals("@")) {
+			t += "\n\nThis path is blocked by an obstacle.\n";
+			a.setTileFace(a.getX(), a.getY()+1);
+		    }
+		    else {
+			a.setY(a.getY() + 1);
+			a.setTileFace(a.getX(), a.getY());
+		    }
 		}
 		else 
 		    t += "\n \nERROR: INVALID MOVEMENT\n"; 
 	    }
 	    
-	    else if (input.equals("help") || input.equals("HELP")) {
+	    else if (input.equals("h") || input.equals("H")) {
 		t += "\n\nHELP: \n";
-		t += "The 'X' represents your position. \n";
+		t += "The 'X' represents YOUR position. \n";
 		t += "The '*' represents the dungeon's borders. \n";
 		t += "The 'O' represents areas already explored. \n";
+		t += "The '@' represents impassable obstacles. \n\n";
 	    }
       
 	    else if (input.equals("quit") || input.equals("QUIT")) {
 		cont = false;
-		return false;
 	    }
 	    
-	    else if (a.getTileFace(a.getX(), a.getY()).equals("^")) {
+	    if ((a.getTileFace(a.getX(), a.getY())).equals("^")) {
 		cont = false;
 		return true;
 	    }
+	    
 	}
-    
+	return false;
     }
   
     public void nextLine() {
