@@ -1,0 +1,20 @@
+public class Character{
+    
+    private int _hp;
+    private int _atk;
+    private int _def;
+    //private int _speed;
+    private int _exp;
+    private int _level;
+
+    public Character(){
+	
+
+    }
+
+    
+
+
+
+
+} //end
