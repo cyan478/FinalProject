@@ -14,72 +14,41 @@ public class GameApp {
   
   public void newGame() {
     String name = "";
-    int act = 0;
+    String act = "";
     boolean cont = true;
-<<<<<<< HEAD
-    String p = "   =================================================" 
-      + "\n====== Pokemon Mystery Dungeon : Explorers of Java  ======" 
-      + "\n======                   v. 1.0                     ======" 
-      + "\n======       Project by: Nancy Cao & Celine Yan     ======"
-      +"\n    =================================================";
-    p += "\n……";
-    p += "\n………………";
-    p += "\nA slight hazy feeling washes over you.";
-    p += "\n……";
-    p += "\n…………";
-    p += "\nYou hear soft splashes of the waves against the sand.";
-    p += "\nSomehow, you’ve ended up on a beach.";
-    p += "\nWeird.";
-    p += "\nWeren’t you struggling to resist falling asleep at your desk just a second ago while studying for that APCS final you have on Thursday?";
-    
-    p += "\n……";
-    p += "\n…………….";
-    p += "\nCries of birds are heard above you.";
-    p += "\nWell. The fact that you still have a test to study for doesn’t change, and you’ve procrastinated an awful lot so let’s try to get you back home to finish studying, shall we?";
-    
-    p += "\n……";
-    p += "\n……………";
-    p += "\nYou try to move your body, but your strength seems somewhat depleted. As you hoist yourself up, you realize one thing:";
-    p += "\nYou’re not human.";
-    
-    p += "\nYou look up ahead and see a glimpse of sunlight behind an opening of a cave.";
-    p += "\nMaybe if you travel to the other side, you’ll be able to get some help.";
-    p += "\nWell, shall we advance?";
-    
-    p += "\nHello! What is your name?"; 
-=======
-    String start = "Press enter to start the game.";
-    start += "\n*   =================================================" 
+    String start ="*   =================================================" 
       + "\n*====== Pokemon Mystery Dungeon : Explorers of Java  ======" 
       + "\n*======                   v. 1.0                     ======" 
       + "\n*======       Project by: Nancy Cao & Celine Yan     ======"
       +"\n*    =================================================";
+    start += "\n(Press enter to start the game)";
     System.out.println(start);
-    String p = "\n*……";
-    p += "\n*………………";
-    p += "\n*A slight hazy feeling washes over you.";
-    p += "\n*……";
-    p += "\n*…………";
-    p += "\n*You hear soft splashes of the waves against the sand.";
-    p += "\n*Somehow, you’ve ended up on a beach.";
-    p += "\n*Weird.";
-    p += "\n*Weren’t you struggling to resist falling asleep at your desk just a second ago while studying for that APCS final you have on Thursday?";
+    String p = "*....\n(Press enter)";
+    p += "*........\n(Press enter)";
+    p += "*A slight hazy feeling washes over you.\n(Press enter)";
+    p += "*....\n(Press enter)";
+    p += "*........\n(Press enter)";
+    p += "*You hear soft splashes of the waves against the sand.\n(Press enter)";
+    p += "*Somehow, you've ended up on a beach.\n(Press enter)";
+    p += "*Weird.\n(Press enter)";
+    p += "*Weren't you struggling to resist falling asleep at your desk just a second ago while studying for that APCS final you have on Thursday?\n(Press enter)";
     
-    p += "\n*……";
-    p += "\n*…………….";
-    p += "\n*Cries of birds are heard above you.";
-    p += "\n*Well. The fact that you still have a test to study for doesn’t change, and you’ve procrastinated an awful lot so let’s try to get you back home to finish studying, shall we?";
+    p += "*....\n(Press enter)";
+    p += "*.........\n(Press enter)";
+    p += "*Cries of birds are heard above you.\n(Press enter)";
+    p += "*Well. The fact that you still have a test to study for doesn't change, and you've procrastinated an awful lot so let's try to get you back home to finish studying, shall we?\n(Press enter)";
     
-    p += "\n*……";
-    p += "\n*……………";
-    p += "\n*You try to move your body, but your strength seems somewhat depleted. As you hoist yourself up, you realize one thing:";
-    p += "\n*You’re not human.";
+    p += "*....\n(Press enter)";
+    p += "*........\n(Press enter)";
+    p += "*You try to move your body, but your strength seems somewhat depleted. As you hoist yourself up, you realize one thing:\n(Press enter)";
+    p += "*You're not human.\n(Press enter)";
     
-    p += "\n*You look up ahead and see a glimpse of sunlight behind an opening of a cave.";
-    p += "\n*Maybe if you travel to the other side, you’ll be able to get some help.";
-    p += "\n*Well, shall we advance?";
+    p += "*You look up ahead and see a glimpse of sunlight behind an opening of a cave.\n(Press enter)";
+    p += "*Maybe if you travel to the other side, you'll be able to get some help.\n(Press enter)";
+    p += "*Well, shall we advance?\n(Press enter)";
     
-    p += "\n*Hello! What is your name?"; 
+    p += "*Hello! What is your name? \n(Enter your name)";
+    
     
     while (p.indexOf("*") != -1) {
       System.out.println(p.substring(0, p.indexOf("*")));
@@ -88,7 +57,6 @@ public class GameApp {
     }
       
       
->>>>>>> 25682ef776184cee35257b20d2c337e9988da431
     System.out.println(p);
     
     try {
@@ -96,7 +64,7 @@ public class GameApp {
     }
     catch ( IOException e ) { }
     
-    p = "Welcome to the world of Pokémon Mystery Dungeon, " + name + "!";
+    p = "Welcome to the world of Pokemon Mystery Dungeon, " + name + "!";
     p += "\n" + name + ", you may now do whatever you wish.";
     System.out.println(p);
     
@@ -111,31 +79,22 @@ public class GameApp {
       System.out.println(p);
       
       try {
-        act = Integer.parseInt(in.readLine());
+        act = (String)(in.readLine());
       }
       catch ( IOException e ) { }
       
-      if (act == 1) System.out.print("<insert stats here>");
-      else if (act == 2) System.out.println("<insert bag items here>");
-<<<<<<< HEAD
-      else if (act == 3) System.out.println("<go to easy dungeon>");
-=======
-      else if (act == 3) easyDungeon();
->>>>>>> 25682ef776184cee35257b20d2c337e9988da431
-      else if (act == 4) System.out.println("<go to med dungeon>");
-      else if (act == 5) System.out.println("<go to hard dungeon>");
-      else if (act == 6) cont = false;
+      if (act.equals("1")) System.out.print("<insert stats here>");
+      else if (act.equals("2")) System.out.println("<insert bag items here>");
+      else if (act.equals("3")) easyDungeon();
+      else if (act.equals("4")) System.out.println("<go to med dungeon>");
+      else if (act.equals("5")) System.out.println("<go to hard dungeon>");
+      else if (act.equals("6")) cont = false;
       else System.out.println("That command is unavailable. Please enter a valid number.");
       
     }
     
   }
   
-<<<<<<< HEAD
-  public void actions() {
-    
-  }
-=======
   public void easyDungeon() {
     Map_Level1 a = new Map_Level1();
   }
@@ -147,7 +106,6 @@ public class GameApp {
     catch ( IOException e ) { }
   }
   
->>>>>>> 25682ef776184cee35257b20d2c337e9988da431
   public static void main(String[] args) {
     GameApp myGame = new GameApp();
   }
