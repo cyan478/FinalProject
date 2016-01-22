@@ -16,36 +16,46 @@ public class GameApp {
     String name = "";
     int act = 0;
     boolean cont = true;
-    String p = "   =================================================" 
-      + "\n====== Pokemon Mystery Dungeon : Explorers of Java  ======" 
-      + "\n======                   v. 1.0                     ======" 
-      + "\n======       Project by: Nancy Cao & Celine Yan     ======"
-      +"\n    =================================================";
-    p += "\n……";
-    p += "\n………………";
-    p += "\nA slight hazy feeling washes over you.";
-    p += "\n……";
-    p += "\n…………";
-    p += "\nYou hear soft splashes of the waves against the sand.";
-    p += "\nSomehow, you’ve ended up on a beach.";
-    p += "\nWeird.";
-    p += "\nWeren’t you struggling to resist falling asleep at your desk just a second ago while studying for that APCS final you have on Thursday?";
+    String start = "Press enter to start the game.";
+    start += "\n*   =================================================" 
+      + "\n*====== Pokemon Mystery Dungeon : Explorers of Java  ======" 
+      + "\n*======                   v. 1.0                     ======" 
+      + "\n*======       Project by: Nancy Cao & Celine Yan     ======"
+      +"\n*    =================================================";
+    System.out.println(start);
+    String p = "\n*……";
+    p += "\n*………………";
+    p += "\n*A slight hazy feeling washes over you.";
+    p += "\n*……";
+    p += "\n*…………";
+    p += "\n*You hear soft splashes of the waves against the sand.";
+    p += "\n*Somehow, you’ve ended up on a beach.";
+    p += "\n*Weird.";
+    p += "\n*Weren’t you struggling to resist falling asleep at your desk just a second ago while studying for that APCS final you have on Thursday?";
     
-    p += "\n……";
-    p += "\n…………….";
-    p += "\nCries of birds are heard above you.";
-    p += "\nWell. The fact that you still have a test to study for doesn’t change, and you’ve procrastinated an awful lot so let’s try to get you back home to finish studying, shall we?";
+    p += "\n*……";
+    p += "\n*…………….";
+    p += "\n*Cries of birds are heard above you.";
+    p += "\n*Well. The fact that you still have a test to study for doesn’t change, and you’ve procrastinated an awful lot so let’s try to get you back home to finish studying, shall we?";
     
-    p += "\n……";
-    p += "\n……………";
-    p += "\nYou try to move your body, but your strength seems somewhat depleted. As you hoist yourself up, you realize one thing:";
-    p += "\nYou’re not human.";
+    p += "\n*……";
+    p += "\n*……………";
+    p += "\n*You try to move your body, but your strength seems somewhat depleted. As you hoist yourself up, you realize one thing:";
+    p += "\n*You’re not human.";
     
-    p += "\nYou look up ahead and see a glimpse of sunlight behind an opening of a cave.";
-    p += "\nMaybe if you travel to the other side, you’ll be able to get some help.";
-    p += "\nWell, shall we advance?";
+    p += "\n*You look up ahead and see a glimpse of sunlight behind an opening of a cave.";
+    p += "\n*Maybe if you travel to the other side, you’ll be able to get some help.";
+    p += "\n*Well, shall we advance?";
     
-    p += "\nHello! What is your name?"; 
+    p += "\n*Hello! What is your name?"; 
+    
+    while (p.indexOf("*") != -1) {
+      System.out.println(p.substring(0, p.indexOf("*")));
+      nextLine();
+      p = p.substring(p.indexOf("*")+1, p.length());
+    }
+      
+      
     System.out.println(p);
     
     try {
@@ -74,7 +84,7 @@ public class GameApp {
       
       if (act == 1) System.out.print("<insert stats here>");
       else if (act == 2) System.out.println("<insert bag items here>");
-      else if (act == 3) System.out.println("<go to easy dungeon>");
+      else if (act == 3) easyDungeon();
       else if (act == 4) System.out.println("<go to med dungeon>");
       else if (act == 5) System.out.println("<go to hard dungeon>");
       else if (act == 6) cont = false;
@@ -84,9 +94,17 @@ public class GameApp {
     
   }
   
-  public void actions() {
-    
+  public void easyDungeon() {
+    Map_Level1 a = new Map_Level1();
   }
+  
+  public void nextLine() {
+    try {
+      in.readLine();
+    }
+    catch ( IOException e ) { }
+  }
+  
   public static void main(String[] args) {
     GameApp myGame = new GameApp();
   }
