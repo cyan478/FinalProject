@@ -1,4 +1,6 @@
-public class Opponent extends Character{
+public interface Opponent{
+
+    public int crit()
 
 
 
