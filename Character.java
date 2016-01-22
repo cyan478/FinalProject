@@ -1,4 +1,4 @@
-public class Character{
+public abstract class Character{
     
     private int _totalhp; //hp limit
     private int _hp; //current hp
@@ -64,6 +64,10 @@ public class Character{
     
     public int getLvl(){
 	return _level;
+    }
+
+    public String getName(){
+	return _name;
     }
     //================================================
 
@@ -133,6 +137,12 @@ public class Character{
     public String hasFainted(){
 	return _name+" has fainted.";
     }
+
+    //Provides info
+    public abstract String info();
+
+
+    
 
 
 } //end
