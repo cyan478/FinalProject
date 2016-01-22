@@ -9,6 +9,7 @@ public class Tile {
     _y = y;
     _face = face;
     _shown = false;
+    if (_x == 0 && _y == 0) _shown = true;
   }
   
   public int getX() {
@@ -25,6 +26,10 @@ public class Tile {
   
   public String getFace() {
     return _face;
+  }
+  
+  public void turnFace() {
+    _shown = true;
   }
     
 }
