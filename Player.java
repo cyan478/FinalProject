@@ -8,7 +8,7 @@ public class Player extends Character{
     public Player(String name){
 	super(name);
 	
-	_bag = new ArrayList<string>();
+	_bag = new ArrayList<String>();
 	_bag.add("Oran berry");
 	
     }
@@ -20,28 +20,32 @@ public class Player extends Character{
 	gainEXP(exp);
 	if (getCurrentEXP() >= getEXP()){
 	    levelUp();
-	    _currentexp = 0;
+	    setCurrentEXP(0);
 	}
 	}
 
     //Gaining EXP (Experience Points used to level up)
     //===================================================
     public void gainEXP(int exp){
-	this._currentexp += exp;
+	int curr = getCurrentEXP();
+        setCurrentEXP(curr+exp);
     }
 
     //Leveling up 
     //===========
     public void levelUp(){
-    	int h,a,d,l;
+    	int h,a,d,ga,gd,l;
     	h = getHP() + (int)(Math.random() * 10);
     	a = (int)(Math.random() *5);
     	d = (int)(Math.random() *5);
+
+	ga = getAtk();
+	gd = getDef();
 	l = getLvl();
     	
         setHP(h);
-        setAtk;
-    	_def += d;
+        setAtk(ga+a);
+        setDef(gd+d);
         setLvl(l++);
     }
     
