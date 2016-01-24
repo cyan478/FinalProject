@@ -11,7 +11,7 @@ public class Opponent extends Character{
                    lvl*10   lvl*5/2  atk   
     Pokemon level totalhp   atk      def    exp
     -----------------------------------------------
-    Zubat    3-8    30-80   8-20    15-40
+    Zubat    3-8    30-80   8-20    8-20
     Geodude  4-9    40-90   10-23  
     Meowth   7-12   70-120  18-30 
     Poochyena 8-13  80-130  20-38
