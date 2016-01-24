@@ -74,6 +74,13 @@ public class Map {
   public int getY() {
     return _y;
   }
+    public int getColumnL() {
+	return _map.length;
+    }
+
+    public int getRowL() {
+	return _map[0].length;
+    }
   
   // movement
 }
