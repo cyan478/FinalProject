@@ -67,6 +67,7 @@ public class Opponent extends Character{
     ret += "--- \n";
     ret += "GAME OVER \n";
     System.out.println(ret);
+    --> exit game
 }
 
 //CHECK YO INFO
@@ -102,6 +103,7 @@ Zinc: 10%
 Reviver Seed: 5%
 Stick: 12%
 Iron Barb: 13% 
+
 
 
 1. Pick Up --> System.out.println("You picked up the " + item + ".");
