@@ -1,7 +1,5 @@
 public class Opponent extends Character{
 
-    private static final String[] pokemon = {"Zubat","Geodude", "Meowth","Poochyena","Marill","Lapras"};
-    
     public Opponent(String name) {
         super(name);
     }
@@ -22,4 +20,16 @@ public class Opponent extends Character{
 
     */
 
+
+
+    /* items:
+
+       Gummy - +5 HP
+       Oran Berry - +20 HP
+       Golden Apple - currentHP = totalhp
+       Rare Candy - +1 lvl
+       Reviver Seed
+       Zinc - Defense
+       Protein - Attack
+    */
 } //end
