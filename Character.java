@@ -146,7 +146,7 @@ public abstract class Character{
     }
 
     //ABSTRACT METHOD
-    public abstract boolean RunAway();
+    public abstract boolean RunAway(int x);
 
 
 } //end

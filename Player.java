@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player extends Character{
+public class Player extends Character implements PlayerInt{
     
     private ArrayList<String> _bag;
     
@@ -59,6 +59,11 @@ public class Player extends Character{
 	ret += "- - - - - - - - - - - - - - - - - -";
 	ret += "You need " + getEXP() +" to level up to level " + getLvl()+1 +"! \n";
         return ret;
+    }
+
+    //RUNNING AWAY (Overriding Abstract Method in Character.java)
+    public boolean RunAway(int useless){
+	return true;
     }
 
     //ITEM USAGE ======================================================================================
