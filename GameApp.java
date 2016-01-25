@@ -26,7 +26,6 @@ public class GameApp {
 	start += "\n(Press enter to continue)";
 	System.out.println(start);
 	String p = "*....\n";
-	/*
 	  p += "*........\n";
 	  p += "*A slight hazy feeling washes over you.\n ";
 	  p += "*....\n ";
@@ -39,7 +38,6 @@ public class GameApp {
 	  p += ".... \n";
 	  p += "Do you remember your name? \n (Type in your name below)"
 	  
-	  */
 	  
 	 try {
 	    name = in.readLine();
@@ -47,7 +45,6 @@ public class GameApp {
 	catch ( IOException e ) { 
 		System.out.println("Please enter a name.");
 	}
-	/*
      
 	  p += "*....\n ";
 	  p += "*.........\n ";
@@ -70,8 +67,6 @@ public class GameApp {
 	  p += "\n";
 	  p += "...";"
 	  
-	*/
-    
 	// Prints out p (story text)
 	while (p.indexOf("*") != -1) {
 	    System.out.println(p.substring(0, p.indexOf("*")));
