@@ -23,9 +23,9 @@ public class GameApp {
 	    + "\n*======                   v. 1.0                     ======" 
 	    + "\n*======       Project by: Nancy Cao & Celine Yan     ======"
 	    +"\n*    =================================================";
-	start += "\n(Press enter to start the game)";
+	start += "\n(Press enter to continue)";
 	System.out.println(start);
-	String p = "*....\n(Keep pressing enter to continue)";
+	String p = "*....\n";
 	/*
 	  p += "*........\n";
 	  p += "*A slight hazy feeling washes over you.\n ";
@@ -35,6 +35,19 @@ public class GameApp {
 	  p += "*Somehow, you've ended up on a beach.\n ";
 	  p += "*Weird.\n ";
 	  p += "*Weren't you struggling to resist falling asleep at your desk just a second ago while studying for that APCS final you have on Thursday?\n ";
+	  
+	  p += ".... \n";
+	  p += "Do you remember your name? \n (Type in your name below)"
+	  
+	  */
+	  
+	 try {
+	    name = in.readLine();
+	}
+	catch ( IOException e ) { 
+		System.out.println("Please enter a name.");
+	}
+	/*
      
 	  p += "*....\n ";
 	  p += "*.........\n ";
@@ -45,12 +58,19 @@ public class GameApp {
 	  p += "*........\n ";
 	  p += "*You try to move your body, but your strength seems somewhat depleted. As you hoist yourself up, you realize one thing:\n ";
 	  p += "*You're not human.\n ";
+	  p += "\n"
      
+     p += "============================ \n";
+     p += "It seems like you've already established your goal. \n";
+	  p += "Time is running out, and you feel that you only have a little bit of time left before you can revert back to a human. \n"
+	  p += "\n";
 	  p += "*You look up ahead and see a glimpse of sunlight behind an opening of a cave.\n ";
 	  p += "*Maybe if you travel to the other side, you'll be able to get some help.\n ";
-	  p += "*Well, shall we advance?\n ";
+	  p += "*Well " + name + ", shall we advance?\n ";
+	  p += "\n";
+	  p += "...";"
+	  
 	*/
-	p += "*Hello! What is your name? \n(Enter your name)";
     
 	// Prints out p (story text)
 	while (p.indexOf("*") != -1) {
@@ -62,14 +82,22 @@ public class GameApp {
     
 	System.out.println(p);
     
-	try {
-	    name = in.readLine();
-	}
-	catch ( IOException e ) { }
-    
 	p = "Welcome to the world of Pokemon Mystery Dungeon, " + name + "!";
-	p += "\n" + name + ", you may now do whatever you wish.";
-	System.out.println(p);
+	p += name + ", this is your first dungeon. Here is a quick tutorial on how to play this game: \n";
+	//INSERT TUTORIAL
+	/*
+	"Dungeons vary in difficulty - from easy to hard."
+	"Each dungeon has a "maze" for you to solve by moving in different rooms."
+	"X is you!"
+	"O are the rooms you already passed by."
+	"@ are walls. You cannot pass through them."
+	"Each room has either an item or a Pokemon."
+	"Items: You can either pick it up or leave it. Different items have different effects on you."
+	"Pokemon: They are all your enemies. Fight them to gain EXP and level up! If you die, you lose the game."
+	"That's about it!"
+	*/
+	
+	System.out.println(p); 
     
 	while (cont) {
 	    p = "\nEnter in an action number:";
@@ -92,7 +120,7 @@ public class GameApp {
 		Map_Level1 a = new Map_Level1();
 		win = launchDungeon(a);
 		if (win) 
-		    System.out.println("Congrats. You earned ___ gold and ___ items!");
+		    System.out.println("Congrats. You earned ___ gold and ___ items!"); //Congrats! You've made it out of the dungeon. Onward to the next!
 		else
 		    System.out.println( "Unfortunately you have lost ___ gold and half your items");
 	    }
