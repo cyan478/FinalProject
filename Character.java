@@ -101,6 +101,12 @@ public abstract class Character{
         _level = x;
     }
     //================================================
+
+    public boolean isAlive(){
+	if (_hp <= 0)
+	    return false;
+	return true;
+    }
     
     //Crit
     //=====
@@ -113,13 +119,13 @@ public abstract class Character{
     	return critical;
     }
 
-    //Attacking Algortihm
+       //Attacking Algortihm
     //====================
     //(pokemon) algorithm inspired by 
     //https://www.math.miami.edu/~jam/azure/compendium/battdam.htm 
     public int attack(int oppDef){
     	int A = crit(); //attacker's level / whether critical hit is considered
-    	int B = _atk; //attacker's atk power
+    	int B = getAtk(); //attacker's atk power
     	int C = oppDef; //opponent's def power
     	int Y = 40; //constant
     	int Z = ((int)(Math.random() * 39)) + 200; //random roll
@@ -130,17 +136,17 @@ public abstract class Character{
     //=============
     public void lowerHP(int n){
 	_hp -=n;
+	System.out.println(_name + "lost "+ n +"  HP! \n");
 	if (_hp <= 0)
 	    hasFainted();
     }
 
-    public String hasFainted(){
-	return _name+" has fainted.";
+    public void hasFainted(){
+        System.out.println( _name+" has fainted. \n");
     }
 
     //ABSTRACT METHOD
-    //Provides info
-    public abstract String info();
+    public abstract boolean RunAway();
 
 
 } //end
