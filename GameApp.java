@@ -11,8 +11,24 @@ public class GameApp {
 	in = new BufferedReader(isr);
 	newGame(); 
     }
+
+    public void printStory(String p){
+	while (p.indexOf("*") != -1) {
+	    System.out.println(p.substring(0, p.indexOf("*")));
+	    nextLine();
+	    p = p.substring(p.indexOf("*")+1, p.length());
+	}
+    }
+
+    public void nextLine() {
+	try {
+	    in.readLine();
+	}
+	catch ( IOException e ) { }
+    }
   
-    public void newGame() throws IOException {
+  
+    public void newGame() {
 	String name = "";
 	String input = "";
 	boolean cont = true;
@@ -35,13 +51,30 @@ public class GameApp {
 	  p += "*Weird.\n ";
 	  p += "*Weren't you struggling to resist falling asleep at your desk just a second ago while studying for that APCS final you have on Thursday?\n ";
 	  
-	  p += ".... \n";
-	  p += "Do you remember your name? \n (Type in your name below)";
+	  p += "*.... \n";
+	  p += "*Do you remember your name? (Type in your name below) \n";
+	  p += "*";
+
+	  printStory(p);
 	  
-	  //while (!(name.equals(""))) {
-	  //    namex
-	  
-	  p += "*....\n ";
+	  try {
+	      name = in.readLine();
+	  }
+	  catch (IOException e) {
+	      System.out.println("welp");
+	  }
+	  while (name.equals("")) {
+	      System.out.println("Please enter a name.");
+	      try {
+		  name = in.readLine();
+	      }
+	      catch (IOException e) {
+		  System.out.println("uhoh");
+	      }
+	  }
+
+	  //resets p
+	  p = "*....\n ";
 	  p += "*.........\n ";
 	  p += "*Cries of birds are heard above you.\n ";
 	  p += "*Well. The fact that you still have a test to study for doesn't change, and you've procrastinated an awful lot so let's try to get you back home to finish studying, shall we?\n ";
@@ -50,30 +83,23 @@ public class GameApp {
 	  p += "*........\n ";
 	  p += "*You try to move your body, but your strength seems somewhat depleted. As you hoist yourself up, you realize one thing:\n ";
 	  p += "*You're not human.\n ";
-	  p += "\n";
      
-     p += "============================ \n";
-     p += "It seems like you've already established your goal. \n";
-     p += "Time is running out, and you feel that you only have a little bit of time left before you can revert back to a human. \n";
-	  p += "\n";
+	  p += "*============================ \n";
+	  p += "*It seems like you've already established your goal. \n";
+	  p += "*Time is running out, and you feel that you only have a little bit of time left before you can revert back to a human. \n";
+	  p += "*\n";
 	  p += "*You look up ahead and see a glimpse of sunlight behind an opening of a cave.\n ";
 	  p += "*Maybe if you travel to the other side, you'll be able to get some help.\n ";
-	  p += "*Well " + name + ", shall we advance?\n ";
-	  p += "\n";
-	  p += "...";
+	  p += "*Well " + name + ", shall we advance?";
+	  p += "*\n";
+	  p += "*...";
+	  p += "*";
 	  
-	// Prints out p (story text)
-	while (p.indexOf("*") != -1) {
-	    System.out.println(p.substring(0, p.indexOf("*")));
-	    nextLine();
-	    p = p.substring(p.indexOf("*")+1, p.length());
-	}
+	  printStory(p);
     
     
-	System.out.println(p);
-    
-	p = "Welcome to the world of Pokemon Mystery Dungeon, " + name + "!";
-	p += name + ", this is your first dungeon. Here is a quick tutorial on how to play this game: \n";
+	  p = "*Welcome to the world of Pokemon Mystery Dungeon, " + name + "! \n";
+	p += "*" +name + ", this is your first dungeon. Here is a quick tutorial on how to play this game: \n";
 	//INSERT TUTORIAL
 	/*
 	"Dungeons vary in difficulty - from easy to hard."
@@ -87,7 +113,7 @@ public class GameApp {
 	"That's about it!"
 	*/
 	
-	System.out.println(p); 
+        printStory(p);
     
 	while (cont) {
 	    p = "\nEnter in an action number:";
@@ -255,14 +281,7 @@ public class GameApp {
 	}
 	return false;
     }
-  
-    public void nextLine() {
-	try {
-	    in.readLine();
-	}
-	catch ( IOException e ) { }
-    }
-  
+
     public static void main(String[] args) {
 	GameApp myGame = new GameApp();
     }
