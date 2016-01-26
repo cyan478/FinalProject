@@ -1,23 +1,10 @@
-public class Opponent extends Character{
+check opponent .java
 
-    private static final String[] pokemon = {"Zubat","Geodude", "Meowth","Poochyena","Marill","Lapras"};
-    
-    
-    public Opponent(String name, int totalhp, int atk, int def, int lvl, int exp) {
-        super(name,totalhp,atk,def,lvl,exp);
-    }
+actually here
 
-    //Calculates chances of running away: only 15% chance that it will only if opponent's level is lower than player's level-5
-    public boolean RunAway(int playerLvl){
-	if (getLvl() < playerLvl - 5){
-	    int r = (int)(Math.random() * 100);
-	    return (r <= 15);
-	}
-	return false;
-    }
+ill jsut copt and paste
 
-    
-    /*
+ /*
       Stats:
       lvl*10   lvl*5/2  atk   
       Pokemon level totalhp   atk      def    exp
@@ -106,8 +93,6 @@ public class Opponent extends Character{
       Stick: 12%
       Iron Barb: 13% 
 
-
-
       1. Pick Up --> System.out.println("You picked up the " + item + ".");
       2. Leave it --> System.out.println("You left the " + item + "  on the ground.");
 
@@ -119,8 +104,4 @@ public class Opponent extends Character{
       --> if bag doesn't contain item
       --> if it does contain, it'll change ur stats and sop info.
 
-
-
-
     */
-} //end

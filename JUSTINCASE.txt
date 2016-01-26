@@ -1,0 +1,45 @@
+	while (cont) {
+	    p = "\nEnter in an action number:";
+	    p += "\n1. Check stats";
+	    p += "\n2. View bag";
+	    p += "\n3. Go to Dungeon #1 [EASY]";
+	    p += "\n4. Go to Dungeon #2 [MEDIUM]";
+	    p += "\n5. Go to Dungeon #3 [HARD]";
+	    p += "\n6. Exit :(";
+	    System.out.println(p);
+      
+	    try {
+		input = (String)(in.readLine());
+	    }
+	    catch ( IOException e ) { }
+      
+	    if (input.equals("1")) System.out.println("<insert stats here>");
+	    else if (input.equals("2")) System.out.println("<insert bag items here>");
+	    else if (input.equals("3")) {
+		Map_Level1 a = new Map_Level1();
+		win = launchDungeon(a);
+		if (win) 
+		    System.out.println("Congrats. You earned ___ gold and ___ items!"); //Congrats! You've made it out of the dungeon. Onward to the next!
+		else
+		    System.out.println( "Unfortunately you have lost ___ gold and half your items");
+	    }
+	    else if (input.equals("4")) {
+		Map_Level2 a = new Map_Level2();
+		win = launchDungeon(a);
+		if (win) 
+		    System.out.println("Congrats. You earned ___ gold and ___ items!");
+		else
+		    System.out.println( "Unfortunately you have lost ___ gold and half your items");
+	    }
+	    else if (input.equals("5")) {
+		Map_Level3 a = new Map_Level3();
+		win = launchDungeon(a);
+		if (win) 
+		    System.out.println("Congrats. You earned ___ gold and ___ items!");
+		else
+		    System.out.println( "Unfortunately you have lost ___ gold and half your items");
+	    }
+	    else if (input.equals("6")) cont = false;
+	    else System.out.println("That command is unavailable. Please enter a valid number.");
+      
+	}

@@ -8,7 +8,7 @@ public class Tile {
     _x = x;
     _y = y;
     _face = face;
-    _shown = false;
+    _shown = true;
     if (_x == 0 && _y == 0) _shown = true;
   }
   

@@ -62,8 +62,8 @@ public class Player extends Character implements PlayerInt{
     }
 
     //RUNNING AWAY (Overriding Abstract Method in Character.java)
-    public boolean RunAway(int useless){
-	return true;
+    public boolean RunAway(int opplvl){
+    	return (getLvl() >= opplvl+3);
     }
 
     //ITEM USAGE ======================================================================================
@@ -141,27 +141,37 @@ public class Player extends Character implements PlayerInt{
     }
     //===============================================================================================
 
+	//Putting item in bag.
+	public void addItem(String n){
+		_bag.add(n);
+	}
     
     //Viewing your own info
     //=======================
     public String bag(){
 	String ret = "";
+	ret += "------------------------------------------\n";
 	ret += "Items in your bag: \n";
-	for (String x : _bag)
+	for (String x : _bag){
 	    ret += x + "\n";
+	}
+	ret += "------------------------------------------\n";
 	return ret;
     }
 
     public String info(){
 	String ret = "";
+	ret += "------------------------------------------\n";
 	ret += "Info: \n";
 	ret += "Name: " + getName() +"\n";
 	ret += "Level: " + getLvl() +"\n";
+	ret += "------------------------------------------\n";
 	return ret;
     }
     
     public String viewStats(){
 	String ret = "";
+	ret += "------------------------------------------\n";
 	ret += "Stats: \n";
 	ret += "Total Health: " + getTotalHP() +"\n";
         ret += "Health Right Now: " + getHP() +"\n"; 
@@ -169,6 +179,7 @@ public class Player extends Character implements PlayerInt{
 	ret += "Defense: " + getDef() +"\n";
 	ret += "Total EXP: " + getEXP() +"\n";
 	ret += "EXP Needed to Level Up: " + (getEXP()-getCurrentEXP()) +"\n";
+	ret += "------------------------------------------\n";
 	return ret;
     }
     

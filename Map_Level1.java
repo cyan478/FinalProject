@@ -7,9 +7,10 @@ public class Map_Level1 extends Map {
     String [][] a = {
       {"O","O","O"},
       {"O","O","O"},
-      {"O","O","^"}
+      {"O","O","O"}
     };
     setStringMap(a);
+    setStairs();
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 3; j++) 
         setTile(i, j);
