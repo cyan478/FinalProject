@@ -1,3 +1,7 @@
+TO DO LIST
+-gotta make sure while loop stops when player dies from battle
+-how does player use item
+
 check opponent .java
 
 actually here

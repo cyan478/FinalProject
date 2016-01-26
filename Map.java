@@ -93,4 +93,11 @@ public class Map {
     public int getRowL() {
 	return _map[0].length;
     }
+    
+    public int getDungeonNum() {
+        if ((_map[0].length) == 3) return 1;
+        else if ((_map[0].length) == 5) return 2;
+        else return 3;
+    }
+    
 }

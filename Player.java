@@ -50,14 +50,14 @@ public class Player extends Character implements PlayerInt{
         setLvl(l++);
 
 	ret += "You leveled up! \n";
-	ret += "You are now level "+ getLvl() + "! \n";
+	ret += "You are now level "+ (l+1) + "! \n";
 	ret += "The following stats have increased: \n";
-	ret += "- - - - - - - - - - - - - - - - - -";
+	ret += "- - - - - - - - - - - - - - - - - - \n";
 	ret += "Health: +" +h+ "\n";
 	ret += "Attack Value: +" +a+ "\n";
 	ret += "Defense Value: +" +d+ "\n";
-	ret += "- - - - - - - - - - - - - - - - - -";
-	ret += "You need " + getEXP() +" to level up to level " + getLvl()+1 +"! \n";
+	ret += "- - - - - - - - - - - - - - - - - - \n";
+	ret += "You need " + getEXP() +" to level up to level " + (getLvl()+1) +"! \n";
         return ret;
     }
 
@@ -92,6 +92,7 @@ public class Player extends Character implements PlayerInt{
 	    else{
 		setHP(ghp+5);
 		System.out.println(itemResponse("Gummy",5));
+		removeFromBag("Gummy");
 	    }
 	}
 
@@ -101,15 +102,17 @@ public class Player extends Character implements PlayerInt{
 	    else{
 		setHP(ghp+20);
 		System.out.println(itemResponse("Oran Berry",20));
+		removeFromBag("Oran Berry");
 	    }
 	}
 
 	if (item == "Golden Apple"){
 	    if (ghp == gthp)
-		System.out.println(fullHealth);
+			System.out.println(fullHealth);
 	    else{
-		setHP(gthp);
+			setHP(gthp);
 	        System.out.println(itemResponse("Gummy",gthp-ghp));
+	        removeFromBag("Golden Apple");
 	    }
 	}
 
@@ -119,16 +122,19 @@ public class Player extends Character implements PlayerInt{
 	    String ret =  "After eating the Rare Candy, ";
 	    System.out.print(ret);
 	    update(gexp);
+	    removeFromBag("Rare Candy");
 	}
 
 	if (item == "Protein"){
 	    setAtk(gatk + 2);
 	    System.out.println("After consuming the Protein, you gained 2 Attack Points! \n");
+	    removeFromBag("Protein");
 	}
 
 	if (item == "Zinc"){
 	    setDef(gdef + 2);
 	    System.out.println("After consuming the Zinc, you gained 2 Defense Points! \n");
+	    removeFromBag("Zinc");
 	}
 
 	if (item == "Reviver Seed"){
@@ -141,23 +147,36 @@ public class Player extends Character implements PlayerInt{
     }
     //===============================================================================================
 
+	//REVIVER SEED IN BAG?
+	public boolean searchBag(String item){
+		return _bag.contains(item);
+	}
+	
+	public void removeFromBag(String item){
+		_bag.remove(item);
+	}
+	
+	
 	//Putting item in bag.
 	public void addItem(String n){
 		_bag.add(n);
 	}
     
+
     //Viewing your own info
     //=======================
+
     public String bag(){
-	String ret = "";
-	ret += "------------------------------------------\n";
-	ret += "Items in your bag: \n";
-	for (String x : _bag){
-	    ret += x + "\n";
-	}
+		String ret = "";
+		ret += "------------------------------------------\n";
+		ret += "Items in your bag: \n";
+		for (String x : _bag){
+	    	ret += x + "\n";
+		}
 	ret += "------------------------------------------\n";
 	return ret;
     }
+ 
 
     public String info(){
 	String ret = "";
@@ -182,8 +201,7 @@ public class Player extends Character implements PlayerInt{
 	ret += "------------------------------------------\n";
 	return ret;
     }
-    
-    
+
 
 
 

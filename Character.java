@@ -16,13 +16,13 @@ public abstract class Character{
     //used for creating player
     public Character(String name){
 	_name = name;
-	_totalhp = 10;
+	_totalhp = 50;
 	_hp = _totalhp; //full health
-	_atk = 5;
-	_def = 5;
-	_exp = 0;
+	_atk = 13;
+	_def = 13;
+	_exp = 50;
 	_currentexp = 0;
-	_level = 1;
+	_level = 5;
     }
     
     //mainly used for opponents 

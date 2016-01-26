@@ -7,6 +7,8 @@ public class GameApp {
     private BufferedReader in;
     private Player _you;
     private static final String [] pkmn1 = {"Zubat", "Geodude", "Onix", "Golbat", "Zubat", "Zubat", "Geodude"}; //len: 7 //more chances to get zubat and geodude
+    private static final String [] pkmn2 = {"Vulpix", "Eevee", "Skitty", "Miltank", "Vulpix", "Zubat", "Furret"}; //len: 7
+    private static final String [] pkmn3 = {"Lapras", "Charizard", "Salamance", "Dragonite", "Salamance", "Dragonite", "Flygon"}; //len: 7
     private Map_Level1 d1;
     private Map_Level2 d2;
     private Map_Level3 d3;
@@ -19,14 +21,16 @@ public class GameApp {
     }
     
     //PRINTING STORY ALGORITHM ==========================
+    
     public void printStory(String p){
-	while (p.indexOf("*") >= 1) {
-	    System.out.println(p.substring(0, p.indexOf("*")-1));
+	while (p.indexOf("*") != -1) {
+	    System.out.println();
 	    nextLine();
 	    p = p.substring(p.indexOf("*")+1, p.length());
-	}
+		}
     }
 
+		
     public void nextLine() {
 		try {
 	    	in.readLine();
@@ -38,7 +42,7 @@ public class GameApp {
 	//TUTORIAL METHOD ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public void tutorial(){
 		String p = "";
-		p += "--------------- TUTORIAL/HELP --------------\n";
+		p += "--------------- TUTORIAL--------------\n";
 	    p += "Dungeons vary in difficulty - from easy to hard. \n";
 	    p += "Each dungeon has a 'maze' for you to solve by moving across different rooms to reach a staircase. \n";
 	    p += "X is YOU! \n";
@@ -49,18 +53,32 @@ public class GameApp {
 	    p += "**Pokemon**: \nThey are all your enemies. Fight them to gain EXP, get stronger, and level up! If you die, it's game over for you, "+ _you.getName()+". \n";
 	    p += "That's about it! \n";
 	    p += "I wish the best of luck for you in the dungeons...\n";
-	    p += "----------------------------------------------\n";
+	    p += "----------------------------------------\n";
 		System.out.println(p);
 	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
-	//DUNGEON 1 OPPONENT METHOD ============================
-	//when u encounter an opponent IN DUNGEON 1:
+	//DUNGEON 1,2,3 OPPONENT METHOD ============================
+	//when u encounter an opponent IN DUNGEON 1,2,3:
    	public void meetOpponent1(){
    		int randomName = (int)(Math.random() * 7);
    		String name = pkmn1[randomName];
    		int lvl = ((int)(Math.random() * 5)) + 3;
-   		_opp = new Opponent(name, lvl*10, lvl*5/2+1, lvl*5/2+1, lvl, lvl*5/2); //USIN MAH CONSTRUCTOR
+   		_opp = new Opponent(name, lvl*10, lvl*5/2+1, lvl*5/2+1, lvl, lvl*5/2); 
+   	}
+   	
+   	public void meetOpponent2(){
+   		int randomName = (int)(Math.random() * 7);
+   		String name = pkmn1[randomName];
+   		int lvl = ((int)(Math.random() * 4)) + 9;
+   		_opp = new Opponent(name, lvl*10, lvl*5/2+1, lvl*5/2+1, lvl, lvl*5/2);
+   	}
+   	
+   	public void meetOpponent3(){
+   		int randomName = (int)(Math.random() * 7);
+   		String name = pkmn1[randomName];
+   		int lvl = ((int)(Math.random() * 4)) + 14;
+   		_opp = new Opponent(name, lvl*10, lvl*5/2+1, lvl*5/2+1, lvl, lvl*5/2); 
    	}
   //=======================================================
   
@@ -68,15 +86,27 @@ public class GameApp {
   	// returns if player has *survived*
   	// T : Win
   	// F : Loss
-  	public void battle(Player _you) {
+  	public void battle(Player _you, Map a) {
   		String t = "";
   		String battleMsg = "";
   		String input = "";
   		
+  		if (a.getDungeonNum() == 1) meetOpponent1();
+  		if (a.getDungeonNum() == 2) meetOpponent2();
+  		if (a.getDungeonNum() == 3) meetOpponent3();
+  		
+  		t = "------------------------------------------------------- \n";
+		t += "You ran into " + _opp.getName() + "! \n";
+		t += "------------------------------------------------------- \n";
+	  	System.out.println(t);
+		
   		while (_you.isAlive() && _opp.isAlive()) {
+  			t = "";
+  			t += "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
   			t += "Enter in your action: \n";
   			t += "1 - Attack opponent \n";
   			t += "2 - Attempt to run away \n";
+  			t += "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
   			//t += "quit - QUIT GAME [WARNING: You will exit and die] \n \n";
   			System.out.println(battleMsg + "\n");
   			System.out.println(t);
@@ -95,17 +125,19 @@ public class GameApp {
       		if (input.equals("1")) {
       			//player's turn to attack ---------------------------------
       			int playeratk = _you.attack(_opp.getDef());
-      			battleMsg = "You attacked!"; 
+      			battleMsg = "You attacked!\n"; 
       			
       			_opp.lowerHP(playeratk);
-      			battleMsg = _opp.getName() + " lost " + playeratk + " HP! \n";
+      			battleMsg += _opp.getName() + " lost " + playeratk + " HP! \n";
       			
       			//opponent's turn to attack ---------------------------------
-      			int oppatk = _opp.attack(_you.getDef());
-      			battleMsg = _opp.getName() + " attacked! \n"; 
-      			
-      			_you.lowerHP(oppatk);
-      			battleMsg = "You lost " + oppatk + " HP! \n";
+      			if (_opp.isAlive()){
+	      			int oppatk = _opp.attack(_you.getDef());
+	      			battleMsg += _opp.getName() + " attacked! \n"; 
+	      			
+	      			_you.lowerHP(oppatk);
+	      			battleMsg += "You lost " + oppatk + " HP! \n";
+      			}
       		}
       		
       		if (input.equals("2")) {
@@ -130,17 +162,23 @@ public class GameApp {
       		}
       		
 	      	if (!_you.isAlive()) { 
+	      		
 	      		//if bag contains reviver seed, activate it
 				// update HP to 100
       			//remove from bag.
-      			System.out.println("You've been revived by the Reviver Seed in your bag! That really saved your life there, didn't it?");
+      			if (_you.searchBag("Reviver Seed")){
+      				System.out.println("You've been revived by the Reviver Seed in your bag! That really saved your life there, didn't it?");
+      				_you.setHP(_you.getTotalHP());
+      				_you.removeFromBag("Reviver Seed");
       		}
       		
         	else {
       			System.out.println("***ERROR: INVALID ACTION***");
 			}
   		}
+  		}
   	}
+
       		
 	
 	//ITEM CHANCES =========================================
@@ -155,7 +193,7 @@ public class GameApp {
       Reviver Seed: 5%
       */
       
-      public String randomItem(){ // dont forget to add to bag.
+      public String randomItem(){ 
       		int r = ((int)(Math.random() * 100)) + 1; //1-100 
       		if (r <= 5) return "Reviver Seed";
       		else if (r <= 10) return "Rare Candy";
@@ -172,16 +210,17 @@ public class GameApp {
     public void getItem(Player _you) {
     	String randItem = randomItem();
     	_you.addItem(randItem);
-    	System.out.println("--------------------------------------- \n" + "You picked up a " + randItem + "!");
+    	System.out.println("------------------------------------------------------- \n" + 
+    						"You picked up a " + randItem + "!");
     }
     //==============================================================
     
     //33-33-33 % CHANCE! ==========================================
-    public void chanceOfRoom(Player _you){
+    public void chanceOfRoom(Player _you, Map a){
     	int r = ((int)(Math.random() * 100)) + 1; //1-100
-    	if (r <= 33) battle(_you); //BATTLE!!!!
+    	if (r <= 33) battle(_you, a); //BATTLE!!!!
     	else if (r <= 66) getItem(_you); //ITEM!!!
-    	else System.out.println("--------------------------------------- \n" + 
+    	else System.out.println("------------------------------------------------------- \n" + 
     							"There appears to be nothing in this room.\n"); //NOTHING!!!
     }
  
@@ -190,13 +229,14 @@ public class GameApp {
 		String input = "";
 		boolean winGame;
 		
-		String start ="*   =================================================" 
-		    + "\n*====== Pokemon Mystery Dungeon : Explorers of Java  ======" 
-		    + "\n*======                   v. 1.0                     ======" 
-		    + "\n*======       Project by: Nancy Cao & Celine Yan     ======"
-		    +"\n*    =================================================";
+		String start ="   =================================================" 
+		    + "\n====== Pokemon Mystery Dungeon : Explorers of Java  ======" 
+		    + "\n======                   v. 1.0                     ======" 
+		    + "\n======       Project by: Nancy Cao & Celine Yan     ======"
+		    +"\n    =================================================";
 		start += "\n(Press enter to continue)";
 		System.out.println(start);
+		
 		String p = "*....\n";
 		/*
 		  p += "*........\n";
@@ -209,33 +249,25 @@ public class GameApp {
 		  p += "*Weren't you struggling to resist falling asleep at your desk just a second ago while studying for that APCS final you have on Thursday?\n ";
 		  
 		  p += "*.... \n";
-		 */
-		  p += "*Do you remember your name? (Type in your name below)";
-	
+		 
+	*/
 		  printStory(p);
-		  
-		  try {
-		      name = in.readLine();
-		  }
-		  catch (IOException e) {
-		      System.out.println("...");
-		  }
 		  
 		  // if user doesn't enter a name
 		  while (name.equals("")) {
-		      System.out.println("Please enter a name.");
+		  	System.out.println("Please type in your name:");
 		      	try {
 			  		name = in.readLine();
 		      	}
 		      	catch (IOException e) {
-			  System.out.println("...");
 		      }
 		  }
 		  
 		  //creates new player
 		  _you = new Player(name);
-		   /*
+		   
 		  //resets p
+		  /*
 		  p = "*....\n ";
 		  p += "*.........\n ";
 		  p += "*Cries of birds are heard above you.\n ";
@@ -252,16 +284,16 @@ public class GameApp {
 		  p += "*\n";
 		  p += "*You look up ahead and see a glimpse of sunlight behind an opening of a cave.\n ";
 		  p += "*Maybe if you travel to the other side, you'll be able to get some help.\n ";
-		  p += "*Well " + name + ", shall we advance?";
-		  p += "*\n";
-		  p += "*...";
+		  p += "*Well " + name + ", shall we advance? \n";
+		  p += "*...\n*";
 		  
 		  printStory(p);
+		  
 		  p = "*Welcome to the world of Pokemon Mystery Dungeon, " + name + "! \n";
-		  p += "*" +name + ", this is your first dungeon. Here is a quick tutorial on how to play this game: \n";
+		  p += "*" + name + ", this is your first dungeon. Here is a quick tutorial on how to play this game: \n*";
 		  printStory(p);
 		  tutorial(); //this prints out the tutorial
-		  */
+		 */
 		  
 		  //GAME STARTS================================== 
 		  winGame = play(_you, name); // play the dungeons
@@ -282,15 +314,15 @@ public class GameApp {
     	while (_you.isAlive()) {
 		  	boolean win = false;
 		  	d1 = new Map_Level1();
-		  	System.out.println("You are in Dungeon #1! [EASY-PEASY]");
+		  	System.out.println("\nYou are in Dungeon #1! [EASY-PEASY]");
 		  	win = launchDungeon(d1, name);
 		  	if (win) {
 		  		d2 = new Map_Level2();
-		  		System.out.println("You are in Dungeon #2! [A LIL HARDER]");
+		  		System.out.println("\nYou are in Dungeon #2! [A LIL HARDER]");
 		  		win = launchDungeon(d2, name);
 		  		if (win) {
 		  			d3 = new Map_Level3();
-		  			System.out.println("You are in Dungeon #3! [DIFFICULT]");
+		  			System.out.println("\nYou are in Dungeon #3! [DIFFICULT]");
 		  			win = launchDungeon(d3, name);
 		  				if (win) {
 		  					return win;
@@ -312,11 +344,16 @@ public class GameApp {
 		String t = "";
 		String input = "";
 		String border = "* * * * * * * \n";
-    
+    	String sep = "-------------------------------------------------------\n";
 		System.out.println("Your objective: Find the flight of stairs and escape. \n");
     
 		while (cont) {
-			t = "--------------------------------------- \n" + t.substring(t.indexOf("&")+1, t.length());
+			/*
+			t = "********************************************************\n";
+			t += "********************************************************\n";
+			t += "********************************************************\n";
+			*/
+			t = sep + t.substring(t.indexOf("&")+1, t.length());
 		    t += name + "(LVL. " + _you.getLvl() + ") | " + "HP: " + _you.getHP() + "/" + _you.getTotalHP() +"\n"; // CELINE
 		    t += "Enter a letter/word: \n";
 		    t += "w - UP \n";
@@ -356,11 +393,12 @@ public class GameApp {
 				    else {
 						a.setX(a.getX() -1);
 						a.setTileFace(a.getX(), a.getY());
-						chanceOfRoom(_you);
+						chanceOfRoom(_you, a);
+						if (!_you.isAlive()) cont = false;
 				    }
 				}
 					else 
-				    	t += "ERROR: INVALID MOVEMENT\n"; 
+				    	t += "ERROR: INVALID MOVEMENT\n" + sep; 
 		    }
 		    
 		    // LEFT
@@ -373,11 +411,12 @@ public class GameApp {
 				    else {
 						a.setY(a.getY()-1);
 						a.setTileFace(a.getX(), a.getY());
-						chanceOfRoom(_you);
+						chanceOfRoom(_you, a);
+						if (!_you.isAlive()) cont = false;
 				    }
 				}
 					else 
-				    	t += "ERROR: INVALID MOVEMENT\n"; 
+				    	t += "ERROR: INVALID MOVEMENT\n" + sep;  
 		    }
 		    
 		    //DOWN
@@ -390,11 +429,12 @@ public class GameApp {
 				    else {
 						a.setX(a.getX()+1);
 						a.setTileFace(a.getX(), a.getY());
-						chanceOfRoom(_you);
+						chanceOfRoom(_you, a);
+						if (!_you.isAlive()) cont = false;
 				    }
 				}
 					else 
-						t += "ERROR: INVALID MOVEMENT\n"; 
+						t += "ERROR: INVALID MOVEMENT\n" + sep; 
 		    }
 	
 		    // RIGHT
@@ -407,11 +447,12 @@ public class GameApp {
 				    else {
 						a.setY(a.getY() + 1);
 						a.setTileFace(a.getX(), a.getY());
-						chanceOfRoom(_you);
+						chanceOfRoom(_you, a);
+						if (!_you.isAlive()) cont = false;
 				    }
 				}
 					else 
-				    	t += "ERROR: INVALID MOVEMENT\n"; 
+				    	t += "ERROR: INVALID MOVEMENT\n" + sep; 
 		    }
 		    
 		    //1 : VIEW INFO
@@ -429,6 +470,7 @@ public class GameApp {
 		    //3 : VIEW BAG
 		    else if (input.equals ("3")) {
 		    	String n = _you.bag();
+		    	t += "Bag: \n";
 		    	t += n;
 		    }
 		    else if (input.equals("4")) {
