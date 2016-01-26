@@ -21,7 +21,7 @@ public class GameApp {
     }
     
     //PRINTING STORY ALGORITHM ==========================
-    
+    // O(N)
     public void printStory(String p){
 	while (p.indexOf("*") != -1) {
 	    System.out.println(p.substring(0, p.indexOf("*")));
@@ -30,13 +30,14 @@ public class GameApp {
 		}
     }
 
-	// RECURSIVE FUNCTION
+	//O(N)
+        // RECURSIVE FUNCTION
  public static String addStar(String p) {
 	if (p.indexOf("\n") == -1) return "";
 	return "*" + p.substring(0, p.indexOf("\n")+1) +
 	    addStar(p.substring(p.indexOf("\n")+1, p.length()));
     }
-    
+    // O(1)
     public void nextLine() {
 		try {
 	    	in.readLine();
@@ -44,7 +45,7 @@ public class GameApp {
 		catch ( IOException e ) { }
     }
    //=======================================================
-  
+  //O(1)
 	//TUTORIAL METHOD ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public void tutorial(){
 		String p = "";
@@ -64,7 +65,7 @@ public class GameApp {
 	    printStory(p);
 	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+	// All O(1)
 	//DUNGEON 1,2,3 OPPONENT METHOD ============================
 	//when u encounter an opponent IN DUNGEON 1,2,3:
    	public void meetOpponent1(){
@@ -88,7 +89,7 @@ public class GameApp {
    		_opp = new Opponent(name, lvl*10, lvl*5/2+1, lvl*5/2+1, lvl, lvl*5/2); 
    	}
   //=======================================================
-  
+  // O(1)
   	// battle with opponent
   	// returns if player has *survived*
   	// T : Win
@@ -200,7 +201,7 @@ public class GameApp {
       Zinc: 10%
       Reviver Seed: 5%
       */
-      
+      // O(1)
       public String randomItem(){ 
       		int r = ((int)(Math.random() * 100)) + 1; //1-100 
       		if (r <= 5) return "Reviver Seed";
@@ -222,7 +223,7 @@ public class GameApp {
     						"You picked up a " + randItem + "!");
     }
     //==============================================================
-    
+    // O(1)
     //33-33-33 % CHANCE! ==========================================
     public void chanceOfRoom(Player _you, Map a){
     	int r = ((int)(Math.random() * 100)) + 1; //1-100
@@ -231,7 +232,7 @@ public class GameApp {
     	else System.out.println("------------------------------------------------------- \n" + 
     							"There appears to be nothing in this room.\n"); //NOTHING!!!
     }
- 
+ // O(N)
     public void newGame() {
 		String name = "";
 		String input = "";
