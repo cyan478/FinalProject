@@ -3,8 +3,10 @@ import java.util.List;
 
 public class Player extends Character implements PlayerInt{
     
+    //O(1)
     private ArrayList<String> _bag;
     
+    //O(1)
     public Player(String name){
 	super(name);
 	
@@ -12,7 +14,8 @@ public class Player extends Character implements PlayerInt{
 	_bag.add("Oran berry");
 	
     }
-
+    
+	//O(1)
     //Update Character
     //===============
     //gainEXP(x) -> if _exp+=exp > _exp limit, levelUp()
@@ -24,6 +27,7 @@ public class Player extends Character implements PlayerInt{
 	}
 	}
 
+	//O(1)
     //Gaining EXP (Experience Points used to level up)
     //===================================================
     public void gainEXP(int exp){
@@ -31,6 +35,7 @@ public class Player extends Character implements PlayerInt{
         setCurrentEXP(curr+exp);
     }
 
+	//O(1)
     //Leveling up 
     //===========
     public String levelUp(){
@@ -61,11 +66,13 @@ public class Player extends Character implements PlayerInt{
         return ret;
     }
 
+	//O(1)
     //RUNNING AWAY (Overriding Abstract Method in Character.java)
     public boolean RunAway(int opplvl){
     	return (getLvl() >= opplvl+3);
     }
 
+	//O(1)
     //ITEM USAGE ======================================================================================
     public void CheckUseItem(String item){
 	if (_bag.isEmpty())
@@ -77,6 +84,7 @@ public class Player extends Character implements PlayerInt{
        }
     }
 
+	//O(1)
     public void useItem(String item){
 	int ghp = getHP();
 	int gthp = getTotalHP();
@@ -142,27 +150,30 @@ public class Player extends Character implements PlayerInt{
 	}
     }
 
+	//O(1)
     public String itemResponse(String item,int num){
         return "After eating the " + item + ", you gained back " + num + " HP! \n";
     }
     //===============================================================================================
 
+	//O(1)
 	//REVIVER SEED IN BAG?
 	public boolean searchBag(String item){
 		return _bag.contains(item);
 	}
 	
+	//O(1)
 	public void removeFromBag(String item){
 		_bag.remove(item);
 	}
 	
-	
+	//O(1)
 	//Putting item in bag.
 	public void addItem(String n){
 		_bag.add(n);
 	}
     
-
+//O(1)
     //Viewing your own info
     //=======================
 
@@ -177,7 +188,7 @@ public class Player extends Character implements PlayerInt{
 	return ret;
     }
  
-
+//O(1)
     public String info(){
 	String ret = "";
 	ret += "------------------------------------------\n";
@@ -188,6 +199,7 @@ public class Player extends Character implements PlayerInt{
 	return ret;
     }
     
+    //O(1)
     public String viewStats(){
 	String ret = "";
 	ret += "------------------------------------------\n";

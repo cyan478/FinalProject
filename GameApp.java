@@ -24,13 +24,19 @@ public class GameApp {
     
     public void printStory(String p){
 	while (p.indexOf("*") != -1) {
-	    System.out.println();
+	    System.out.println(p.substring(0, p.indexOf("*")));
 	    nextLine();
 	    p = p.substring(p.indexOf("*")+1, p.length());
 		}
     }
 
-		
+	// RECURSIVE FUNCTION
+ public static String addStar(String p) {
+	if (p.indexOf("\n") == -1) return "";
+	return "*" + p.substring(0, p.indexOf("\n")+1) +
+	    addStar(p.substring(p.indexOf("\n")+1, p.length()));
+    }
+    
     public void nextLine() {
 		try {
 	    	in.readLine();
@@ -43,18 +49,19 @@ public class GameApp {
 	public void tutorial(){
 		String p = "";
 		p += "--------------- TUTORIAL--------------\n";
-	    p += "Dungeons vary in difficulty - from easy to hard. \n";
-	    p += "Each dungeon has a 'maze' for you to solve by moving across different rooms to reach a staircase. \n";
-	    p += "X is YOU! \n";
+	    p += "Dungeons vary in difficulty - from easy to hard.\n";
+	    p += "Each dungeon has a 'maze' for you to solve by moving across different rooms to reach a staircase.\n";
+	    p += "X is YOU!\n";
 	    p += "O are the rooms you already passed by. \n";
 	    p += "@ are walls. You cannot pass through them. \n";
 	    p += "Each room has either an item, a Pokemon, or nothing. \n";
-	    p += "**Items**: \nYou can either pick it up or leave it. Different items have different effects on you. \n\n";
-	    p += "**Pokemon**: \nThey are all your enemies. Fight them to gain EXP, get stronger, and level up! If you die, it's game over for you, "+ _you.getName()+". \n";
-	    p += "That's about it! \n";
-	    p += "I wish the best of luck for you in the dungeons...\n";
+	    p += "Items: You can either pick it up or leave it. Different items have different effects on you.\n";
+	    p += "Pokemon: They are all your enemies. Fight them to gain EXP, get stronger, and level up! If you die, it's game over for you, "+ _you.getName()+".\n";
+	    p += "That's about it!\n";
+	    p += "I wish the best of luck for you in the dungeons.\n";
 	    p += "----------------------------------------\n";
-		System.out.println(p);
+	    p = addStar(p);
+	    printStory(p);
 	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
@@ -158,6 +165,7 @@ public class GameApp {
       		if(!_opp.isAlive()) {
       			_you.update(_opp.getEXP());
       			System.out.println(_opp.getName() + " fainted!");
+      			System.out.println("You gained " + _opp.getEXP() +" EXP points!");
       			break;
       		}
       		
@@ -238,7 +246,7 @@ public class GameApp {
 		System.out.println(start);
 		
 		String p = "*....\n";
-		/*
+		
 		  p += "*........\n";
 		  p += "*A slight hazy feeling washes over you.\n ";
 		  p += "*....\n ";
@@ -249,8 +257,8 @@ public class GameApp {
 		  p += "*Weren't you struggling to resist falling asleep at your desk just a second ago while studying for that APCS final you have on Thursday?\n ";
 		  
 		  p += "*.... \n";
+		  p += "*Do you remember your name? (Please enter below)*";
 		 
-	*/
 		  printStory(p);
 		  
 		  // if user doesn't enter a name
@@ -267,7 +275,7 @@ public class GameApp {
 		  _you = new Player(name);
 		   
 		  //resets p
-		  /*
+		  
 		  p = "*....\n ";
 		  p += "*.........\n ";
 		  p += "*Cries of birds are heard above you.\n ";
@@ -293,15 +301,25 @@ public class GameApp {
 		  p += "*" + name + ", this is your first dungeon. Here is a quick tutorial on how to play this game: \n*";
 		  printStory(p);
 		  tutorial(); //this prints out the tutorial
-		 */
+		 
 		  
 		  //GAME STARTS================================== 
 		  winGame = play(_you, name); // play the dungeons
 		  
 		  // GAME ENDS===================================
-		  if (winGame)
-		  	System.out.println("you win!");
-		  else System.out.println("you lose!");
+		  if (winGame){
+		  	String win = "";
+		  	win += "*Well, would you look at that, " + _you.getName() + ". \n";
+		  	win += "*You successfully cleared all three dungeons and managed to make it out alive! \n";
+		  	win += "*...\n";
+		  	win += "*Birds chirp happily behind you. \n";
+		  	win += "*...\n";
+		  	win += "*Up ahead is the portal for you to turn back into a human. \n";
+		  	win += "*You jump into the portal, and soon find yourself laying on your bed with your APCS notes by your side. \n";
+		  	win += "*Congratulations for winning the game!\n*";
+		  	printStory(win);
+		  }
+		  else System.out.println("Unfortunately, you've fainted midway. Time passes by. I'm sorry, but you cannot become a human once again.\nGAME OVER\n");
 		  
 
     }
