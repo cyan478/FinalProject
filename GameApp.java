@@ -89,7 +89,7 @@ public class GameApp {
    		_opp = new Opponent(name, lvl*10, lvl*5/2+1, lvl*5/2+1, lvl, lvl*5/2); 
    	}
   //=======================================================
-  // O(1)
+  // Min: O(1); Max: O(N)
   	// battle with opponent
   	// returns if player has *survived*
   	// T : Win
@@ -232,7 +232,7 @@ public class GameApp {
     	else System.out.println("------------------------------------------------------- \n" + 
     							"There appears to be nothing in this room.\n"); //NOTHING!!!
     }
- // O(N)
+ // min: O(1); max:O(N)
     public void newGame() {
 		String name = "";
 		String input = "";
